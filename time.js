@@ -33,7 +33,10 @@
       if (result) {
         hours = parseInt(result[1]);
         minutes = result[2] ? parseInt(result[2]) : 0;
-        period = parsePeriod(result[3]);
+        if (!result[3] && hours === 12)
+          period = PM;
+        else
+          period = parsePeriod(result[3]);
       } else {
         // parse 24-hour military time
         result = militaryTimeRegex.exec(sanitizedTime);
@@ -253,7 +256,8 @@
    * (private)
    */
   function parsePeriod(period) {
-    if (!period || !period.match(periodRegex)) return null;
+    if (!period) return AM;
+    else if (!period.match(periodRegex)) return null;
     else if (period.match(/^p/i) != null) return PM;
     return (period.match(/^a/i) != null) ? AM : null;
   }

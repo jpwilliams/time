@@ -1,6 +1,6 @@
 {
   "name": "time-js",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "author": "Zack Dever <zackdever@gmail.com>",
   "description": "date-agnostic time parsing for node and the browser",
   "main": "time.js",

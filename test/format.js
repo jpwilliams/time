@@ -61,10 +61,11 @@ describe('Time', function() {
       t.format('hP').should.equal('12A');
     });
 
-    it('should ignore period if not originally parsed', function() {
+    // BREAKING CHANGE IN VERSION 0.1.0
+    it('do not ignore period if not originally parsed', function() {
       var t = time('1');
-      t.format('hpm').should.equal('1');
-      t.format('h:mm PM').should.equal('1:00');
+      t.format('hpm').should.equal('1am');
+      t.format('h:mm PM').should.equal('1:00 AM');
     });
 
     it('should hide period if not requested', function() {
@@ -129,6 +130,19 @@ describe('Time', function() {
       t.format('HH').should.equal('00');
       t.format('HHmm').should.equal('0000');
       t.format('HH:mm').should.equal('00:00');
+    });
+
+    it('should format military time: 11', function() {
+      var t = time('11');
+      t.format('hmm').should.equal('1100');
+      t.format('hhmm').should.equal('1100');
+      t.period().should.equal('am');
+      t.format('hh:mm AM').should.equal('11:00 AM');
+      t.format('H').should.equal('11');
+      t.format('HH').should.equal('11');
+      t.format('HHmm').should.equal('1100');
+      t.format('HH:mm').should.equal('11:00');
+      t.format('HH:mm AM').should.equal('11:00');
     });
 
     it('should format military time: 13', function() {
