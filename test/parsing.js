@@ -102,8 +102,8 @@ describe('Time', function() {
         hour = hours[i];
         result = time(hour);
         result.isValid().should.be.ok;
-        result.hours().should.equal(parseInt(hour));
-        result.militaryHours().should.equal(parseInt(hour));
+        result.hours().should.equal(parseInt(hour, 10));
+        result.militaryHours().should.equal(parseInt(hour, 10));
         result.minutes().should.equal(0);
       }
     });
@@ -132,8 +132,8 @@ describe('Time', function() {
           input = hour + ':' + minute;
           result = time(input);
           result.isValid().should.be.ok;
-          result.hours().should.equal(parseInt(hour));
-          result.minutes().should.equal(parseInt(minute));
+          result.hours().should.equal(parseInt(hour, 10));
+          result.minutes().should.equal(parseInt(minute, 10));
         }
       }
     });
@@ -146,8 +146,8 @@ describe('Time', function() {
           minute = minutes[j];
           result = time(hour + minute);
           result.isValid().should.be.ok;
-          result.hours().should.equal(parseInt(hour));
-          result.minutes().should.equal(parseInt(minute));
+          result.hours().should.equal(parseInt(hour, 10));
+          result.minutes().should.equal(parseInt(minute, 10));
         }
       }
     });

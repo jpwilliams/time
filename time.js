@@ -31,8 +31,8 @@
       // parse 12-hour time
       var result = timeRegex.exec(sanitizedTime);
       if (result) {
-        hours = parseInt(result[1]);
-        minutes = result[2] ? parseInt(result[2]) : 0;
+        hours = parseInt(result[1], 10);
+        minutes = result[2] ? parseInt(result[2], 10) : 0;
         if (!result[3] && hours === 12)
           period = PM;
         else
@@ -41,11 +41,11 @@
         // parse 24-hour military time
         result = militaryTimeRegex.exec(sanitizedTime);
         if (result) {
-          hours = parseInt(result[1]);
+          hours = parseInt(result[1], 10);
           period = hours > 11 ? PM : AM;
           if (hours > 12) hours -= 12;
           if (hours === 0) hours = 12;
-          minutes = result[2] ? parseInt(result[2]) : 0;
+          minutes = result[2] ? parseInt(result[2], 10) : 0;
         }
       }
     } else {
@@ -61,7 +61,7 @@
     // gets or sets hours
     this.hours = function(newHours) {
       if (!newHours) return hours;
-      hours = parseInt(newHours);
+      hours = parseInt(newHours, 10);
     };
 
     this.militaryHours = function(newHours) {
@@ -75,11 +75,11 @@
           if (hours === 12)
             return 12;
           else {
-            return parseInt(hours) + 12;
+            return parseInt(hours, 10) + 12;
           }
         }
       }
-      hours = parseInt(newHours);
+      hours = parseInt(newHours, 10);
       period = hours > 11 ? PM : AM;
       if (hours > 12) hours -= 12;
       if (hours === 0) hours = 12;
@@ -88,7 +88,7 @@
     // gets or sets minutes
     this.minutes = function(newMinutes) {
       if (!newMinutes) return minutes;
-      minutes = parseInt(newMinutes);
+      minutes = parseInt(newMinutes, 10);
     };
 
     // gets or sets period
